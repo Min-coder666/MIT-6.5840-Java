@@ -6,8 +6,9 @@ import com.min.common.PutAppendArgs;
 import com.min.common.PutAppendReply;
 import com.min.rpc.provider.NettyRpcProvider;
 
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -16,28 +17,19 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class KVServer extends NettyRpcProvider {
 
-    private final ConcurrentMap<String, String> store = new ConcurrentHashMap<>();
+    private final Map<String, String> store = new ConcurrentHashMap<>();
 
-    public final AtomicInteger putAppendCnt = new AtomicInteger(0);
     public KVServer(int port) {
         super(port);
     }
 
     public PutAppendReply putAppend(PutAppendArgs args){
-        putAppendCnt.incrementAndGet();
-        Integer op = args.getOpType();
         String key = args.getKey();
         String val = args.getVal();
         PutAppendReply reply = new PutAppendReply();
-        if (PutAppendArgs.OP_APPEND.equals(op)){
-            String oldContent = store.getOrDefault(key,"");
-            String newVal = oldContent+val;
-            reply.setSuccess(true);
-            reply.setVal(store.put(key,newVal));
-        } else if (PutAppendArgs.OP_PUT.equals(op)) {
-            reply.setSuccess(true);
-            reply.setVal(store.put(key,val));
-        }
+        String ret = store.compute(key,(k,v)-> Objects.isNull(v)?val:v+val);
+        reply.setSuccess(true);
+        reply.setVal(ret);
         return reply;
     }
 

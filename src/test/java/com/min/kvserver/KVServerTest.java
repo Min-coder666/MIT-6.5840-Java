@@ -10,8 +10,8 @@ import static org.junit.Assert.*;
 public class KVServerTest {
 
     private static KVServer server;
-    private static final int CLIENT_COUNT = 10;
-    private static final int OPERATIONS_PER_CLIENT = 100;
+    private static final int CLIENT_COUNT = 12;
+    private static final int OPERATIONS_PER_CLIENT = 1000;
     private static final int SERVER_PORT = 10002;
 
     @BeforeClass
@@ -39,8 +39,7 @@ public class KVServerTest {
                 for (int j = 0; j < OPERATIONS_PER_CLIENT; j++) {
                     String key = "key";
 
-                    // 执行 append 操作
-                    String appendRet = KVClient.append(key, "k");
+                    KVClient.append(key, "k");
                 }
                 latch.countDown();
             });
@@ -50,7 +49,6 @@ public class KVServerTest {
         executorService.shutdown();
         KVClient client = new KVClient(SERVER_PORT);
         String res = client.get("key");
-        System.out.println(server.putAppendCnt.get());
         assertEquals(res.length(),CLIENT_COUNT*OPERATIONS_PER_CLIENT);
         System.out.println("All clients have finished their operations.");
     }

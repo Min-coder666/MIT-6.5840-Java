@@ -1,7 +1,7 @@
 package com.min.kvserver;
 
 import com.min.common.*;
-import com.min.rpc.consumer.NettyRpcClient;
+import com.min.rpc.client.NettyRpcClient;
 
 /**
  * @author wangmin
