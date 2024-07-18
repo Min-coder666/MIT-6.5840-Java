@@ -14,14 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class KVServer extends NettyRpcProvider {
 
     private final Map<String, String> store = new ConcurrentHashMap<>();
-
-//    public final AtomicInteger putTotalCnt = new AtomicInteger();
-//    public final AtomicInteger putComputeCnt = new AtomicInteger();
-//
-//    public final AtomicInteger putGetFromMap = new AtomicInteger();
-//
-//    public final AtomicInteger ackCnt = new AtomicInteger();
-    // 记录请求id对应的请求值
+    /**
+     * 记录requestId对应的请求结果值,客户端重试时，不会额外操作，成功返回后，删除对应的kv
+     */
     private final Map<String,String> requstMap = new ConcurrentHashMap<>();
 
     public KVServer(int port) {

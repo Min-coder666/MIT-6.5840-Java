@@ -7,7 +7,9 @@ import java.util.UUID;
  * @date 2024/7/18 15:35
  */
 public class Args {
+    // 回复类型
     public static final Integer ARGS_TYPE_REPORT = 1;
+    // 操作类型
     public static final Integer ARGS_TYPE_MODIFY = 2;
     Integer tag = ARGS_TYPE_MODIFY;
     String requestId = UUID.randomUUID().toString().replaceAll("-","");

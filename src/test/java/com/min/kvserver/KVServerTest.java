@@ -1,9 +1,7 @@
 package com.min.kvserver;
 
-import com.min.common.LogUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import sun.rmi.runtime.Log;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

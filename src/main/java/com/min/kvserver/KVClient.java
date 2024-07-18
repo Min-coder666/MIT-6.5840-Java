@@ -44,8 +44,6 @@ public class KVClient extends NettyRpcClient {
 
     private <T extends Reply> T retryCall(String methodName, Args args,Class<T> clazz,boolean isAck){
         for (int i = 0; i < retryCnt; i++) {
-            if(i>=1)
-                LogUtil.log(methodName,"重试了",i,"次, ",args);
             try{
                 T reply = call(methodName,new Object[]{args},clazz,true);
                 if(reply.isSuccess()){
@@ -67,7 +65,6 @@ public class KVClient extends NettyRpcClient {
             call(methodName,new Object[]{args},Args.class,false);
         } catch (Exception e) {
             // 只回复一次
-            e.printStackTrace();
         }
     }
 
