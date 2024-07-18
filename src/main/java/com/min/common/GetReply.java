@@ -4,7 +4,7 @@ package com.min.common;
  * @author wangmin
  * @date 2024/7/17 10:52
  */
-public class GetReply {
+public class GetReply implements Reply{
 
     String val;
 

@@ -4,7 +4,7 @@ package com.min.common;
  * @author wangmin
  * @date 2024/7/17 10:53
  */
-public class PutAppendArgs {
+public class PutAppendArgs extends Args{
     public static final Integer OP_APPEND = 1;
     public static final Integer OP_PUT = 2;
 
@@ -50,5 +50,16 @@ public class PutAppendArgs {
 
     public void setOpType(Integer opType) {
         this.opType = opType;
+    }
+
+    @Override
+    public String toString() {
+        return "PutAppendArgs{" +
+                "key='" + key + '\'' +
+                ", val='" + val + '\'' +
+                ", opType=" + opType +
+                ", tag=" + tag +
+                ", requestId='" + requestId + '\'' +
+                '}';
     }
 }

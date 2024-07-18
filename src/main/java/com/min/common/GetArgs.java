@@ -4,7 +4,7 @@ package com.min.common;
  * @author wangmin
  * @date 2024/7/17 10:51
  */
-public class GetArgs {
+public class GetArgs extends Args{
 
     String key;
 

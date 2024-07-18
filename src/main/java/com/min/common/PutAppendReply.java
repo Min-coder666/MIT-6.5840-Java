@@ -4,7 +4,7 @@ package com.min.common;
  * @author wangmin
  * @date 2024/7/17 10:53
  */
-public class PutAppendReply {
+public class PutAppendReply implements Reply{
 
     String val;
 
