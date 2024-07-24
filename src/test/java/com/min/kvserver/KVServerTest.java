@@ -36,11 +36,15 @@ public class KVServerTest {
 
         for (int i = 0; i < CLIENT_COUNT; i++) {
             executorService.execute(() -> {
-                KVClient KVClient = new KVClient(SERVER_PORT);
-                for (int j = 0; j < OPERATIONS_PER_CLIENT; j++) {
-                    String key = "key";
+                try{
+                    KVClient KVClient = new KVClient(SERVER_PORT);
+                    for (int j = 0; j < OPERATIONS_PER_CLIENT; j++) {
+                        String key = "key";
 
-                    KVClient.append(key, "k");
+                        KVClient.append(key, "k");
+                    }
+                }finally {
+                    latch.countDown();
                 }
                 latch.countDown();
             });
